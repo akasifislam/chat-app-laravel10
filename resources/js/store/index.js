@@ -3,11 +3,15 @@ import axios from 'axios';
 
 const store = createStore({
     state: {
-        users: []
+        users: [],
+        messages: [],
     },
     mutations: {
         SET_USER_LIST(state, users) {
             state.users = users;
+        },
+        SET_MESSAGE_LIST(state, messages) {
+            state.messages = messages;
         }
     },
     actions: {
@@ -18,11 +22,15 @@ const store = createStore({
             } catch (error) {
                 console.error('Error fetching user list:', error);
             }
-        }
+        },
+        async fetchMessages({ commit }, userId) { try { const response = await axios.get(`/api/messages/${userId}`); commit('SET_MESSAGE_LIST', response.data.message); } catch (error) { console.error('Error fetching messages:', error); } }
     },
     getters: {
         getUsers(state) {
             return state.users;
+        },
+        getMessages(state) {
+            return state.messages;
         }
     }
 });

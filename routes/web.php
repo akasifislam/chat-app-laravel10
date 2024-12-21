@@ -34,3 +34,5 @@ require __DIR__ . '/auth.php';
 
 
 Route::get('api/users', [MessageController::class, 'index']);
+Route::get('api/message', [MessageController::class, 'index']);
+Route::get('api/messages/{id}', [MessageController::class, 'user_message'])->name('user.message');
