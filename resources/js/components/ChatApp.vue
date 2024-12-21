@@ -31,7 +31,7 @@
                   <ul>
                       <li v-for="message in messages" :key="message.id" class="clearfix">
                           <div class="message-data" :class="{'align-right': message.form !== currentUser.id}">
-                              <span class="message-data-time">{{ message.created_at }}</span>
+                              <span class="message-data-time"> {{ $filters.formatDate(message.created_at) }}</span>
                               <span class="message-data-name">{{ message.user.name }}</span>
                               <i :class="{'fa fa-circle me': message.form === currentUser.id, 'fa fa-circle other': message.form !== currentUser.id}"></i>
                           </div>
