@@ -44,4 +44,28 @@ class MessageController extends Controller
         })->with('user')->get();
         return $message;
     }
+
+
+
+    public function send_message(Request $request)
+    {
+        // if (!$request->ajax()) {
+        //     return abort(404);
+        // }
+
+        $message = Message::create([
+            'message' => $request->message,
+            'form' => auth()->user()->id,
+            'to' => $request->user_id,
+            'type' => 0
+        ]);
+        $message = Message::create([
+            'message' => $request->message,
+            'form' => auth()->user()->id,
+            'to' => $request->user_id,
+            'type' => 1
+        ]);
+        // broadcast(new MessageSend($message));
+        return response()->json($message, 201);
+    }
 }
