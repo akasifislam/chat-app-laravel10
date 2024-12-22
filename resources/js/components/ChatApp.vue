@@ -68,6 +68,15 @@ export default {
   },
   mounted() {
     this.$store.dispatch("fetchUserList");
+
+    Echo.private(`chating.${this.currentUser.id}`).
+    listen('MessageSend', (e) => { 
+      console.log("event working"); 
+      console.log(e.message.message);
+      this.selectUser(e.message.to); 
+    });
+
+
   },
   computed: {
     users() {
